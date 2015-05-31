@@ -9,7 +9,7 @@ Supposedly a Twitter actions monitor.
 Simply launch a http server at the base directory
 To do so easily type in the terminal:
 ```
-python -m SimpleHTTPServer
+python server.py
 ```
 
 and voilà! you are up and runing at http://localhost:8000 
