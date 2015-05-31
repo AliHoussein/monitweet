@@ -1,8 +1,42 @@
 body {
+	background-color: #2C3E50;
+	color: white;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+input {
+  color: #9b59b6;
+}
+
+.navbar {
+  color: white;
+  background: #9b59b6;
+  border-width: 0;
+}
+
+ul.nav li {
+  background: #f1c40f;
+}
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover {
+  color: white;
+  font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+  background: #f1c40f;
+  color: #9b59b6;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+  color: #9b59b6;
+  font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+  color: white;
 }
