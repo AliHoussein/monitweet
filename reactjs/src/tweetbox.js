@@ -1,9 +1,54 @@
 var TweetBox = React.createClass({
+	loadTweetsFromServer: function() {
+
+		$.ajax({
+			url: this.props.url,
+			dataType: 'json',
+			cache: false,
+			success: function(data) {
+				this.setState({data: data});
+			}.bind(this),
+      		error: function(xhr, status, err) {
+		        console.log(this.props.url, status, err.toString());
+			}.bind(this)
+		});
+	},
+
+	getInitialState: function() {
+		return {data: []};
+	},
+
+	componentDidMount: function() {
+		this.loadTweetsFromServer();
+		setInterval(this.loadTweetsFromServer, this.props.pollInterval);
+	},
+
+	handleTweetSubmit: function(tweet) {
+
+		var tweets = this.state.data;
+		var newTweets = tweets.concat([tweet]);
+		this.setState({data: newTweets});
+
+		$.ajax({
+			url: this.props.url,
+			dataType: 'json',
+			type: 'POST',
+			data: tweet,
+			success: function(data) {
+				this.setState({data: data});
+		  	}.bind(this),
+		  	error: function(xhr, status, err) {
+		    	console.error(this.props.url, status, err.toString());
+			}.bind(this)
+		});
+	},
+
 	render: function() {
 		return (
 			<div className="tweetBox">
+			<TweetForm onTweetSubmit={this.handleTweetSubmit} />
           	<h1>Latests Tweets</h1>
-          	<TweetList data={this.props.data} />
+          	<TweetList data={this.state.data} />
 			</div>
 		);
 	}
@@ -43,13 +88,32 @@ var Tweet = React.createClass({
 	}
 });
 
-var data = [
-  {author: "@AliHoussein", text: "This is one tweet"},
-  {author: "@AliHoussein", text: "This is a *second* tweet"}
-];
+var TweetForm = React.createClass({
+	handleSubmit: function(e) {
+		e.preventDefault(); //Call preventDefault() on the event to prevent the browser's default action of submitting the form.
 
+		var text = React.findDOMNode(this.refs.text).value.trim();
+
+		if (!text) {
+			return;
+		}
+		this.props.onTweetSubmit({author: "@AliHoussein",text: text});
+		React.findDOMNode(this.refs.text).value = '';
+		return;
+	},
+
+
+	render: function() {
+	    return (
+	      <form className="tweetForm" onSubmit={this.handleSubmit} >
+	    	<input type="text" placeholder="Tweet something new..." ref="text" />
+			<input type="submit" value="Post" />
+	      </form>
+	    );
+	  }
+});
 
 React.render(    
-	<TweetBox data={data} />,
-	document.getElementById('container')
+	<TweetBox url="tweets.json" pollInterval={200000} />,
+	document.getElementById('tweetstream')
 );
