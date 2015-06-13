@@ -8,11 +8,31 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+// load app config
+var config = require('./config');
+
+//setup MongoDB database
+var mongo = require('mongodb');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/monitweettest1');
+
+//setup nTwitter instanc
+var twitter = require('ntwitter')
+var twit = new twitter(config.twitter);
+
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hjs');
+//app.set('view engine', 'hjs'); //orignal use hogan.js
+
+// using hogan-express : https://www.npmjs.com/package/hogan-express
+app.set('view engine', 'html');    // use .html extension for templates 
+app.set('layout', 'layout');   //use layout.html as the default layout 
+//app.set 'partials', foo: 'foo'   // define partials available to all pages
+app.enable('view cache');
+app.engine('html', require('hogan-express'));
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));

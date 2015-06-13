@@ -6,7 +6,7 @@ var appDir = path.dirname(require.main.filename); // http://stackoverflow.com/qu
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'The Monitweet starter page' });
 });
 
 router.post('/json/tweets.json', function(req, res) {

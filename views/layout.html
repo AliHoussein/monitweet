@@ -34,21 +34,14 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">Maps</a></li>
+            <li><a href="#about">World Map</a></li>
             <li><a href="#contact">Settings</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
-    <div class="container">
-      <div class="starter-template">
-        <h1>Monitweet starter page</h1>
-        <p class="lead">First thing first connect to Twitter API</p>
-      </div>
-      <div id="tweetstream"></div>
-
-    </div><!-- /.container -->
+    {{{yield-content}}}
 
 
     <script src="/javascripts/build/react.min.js"></script>

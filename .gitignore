@@ -2,3 +2,5 @@
 *.pyc
 .module-cache
 node_modules
+config.js
+data/

@@ -47,7 +47,7 @@ var TweetBox = React.createClass({displayName: "TweetBox",
 		return (
 			React.createElement("div", {className: "tweetBox"}, 
 			React.createElement(TweetForm, {onTweetSubmit: this.handleTweetSubmit}), 
-          	React.createElement("h1", null, "Latests Tweets"), 
+          	React.createElement("h1", null, "Latest Tweets"), 
           	React.createElement(TweetList, {data: this.state.data})
 			)
 		);
