@@ -16,15 +16,15 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/monitweettest1');
 
-//setup nTwitter instanc
-var twitter = require('ntwitter')
-var twit = new twitter(config.twitter);
+//setup Twitter instanc
+var twitter = require('twitter')
+var client = new twitter(config.twitter);
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-//app.set('view engine', 'hjs'); //orignal use hogan.js
+//app.set('view engine', 'hjs'); //orignal to use hogan.js
 
 // using hogan-express : https://www.npmjs.com/package/hogan-express
 app.set('view engine', 'html');    // use .html extension for templates 
